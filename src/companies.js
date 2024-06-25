@@ -26,7 +26,8 @@ const companies = [
   {
     key: 7,
     name: "VdeV",
-    score: 65,
+    score: 42.0,
+    url: "https://5eadvancedmaterials.com/boron-101/",
     img: "https://media.istockphoto.com/photos/mens-grey-blank-tshirt-templatefrom-two-sides-natural-shape-on-for-picture-id1134011734?k=20&m=1134011734&s=612x612&w=0&h=9kTFthlqNT6v0DIjIi-eJSwDZfSj65_qeFso7w2vFOA=",
     product: "Ceramic Plate",
     price: "$14.99",

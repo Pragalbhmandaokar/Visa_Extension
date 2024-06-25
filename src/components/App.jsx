@@ -14,193 +14,104 @@ import companies from "../companies";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function App() {
   const [displayString, setDisplayString] = useState("");
   const [itemName, setItemName] = useState("");
   const [score, setScore] = useState(0);
   const [suggestions, setSuggestions] = useState([]);
+  const [number, setNumber] = useState(0);
 
-  const testFunction = async () => {
-    try {
-      let queryOptions = { active: true, currentWindow: true };
-      chrome.tabs.query(queryOptions, function (res) {
-        const url = res[0].url;
-
-        const urlSearchParams = new URLSearchParams(url);
-
-        //console.log(urlSearchParams.getAll());
-
-        console.log(urlSearchParams.get("k"));
-        console.log(urlSearchParams.get("sprefix"));
-        console.log(urlSearchParams.get("ref"));
-
-        var productType = "";
-
-        var baseURl = "";
-
-        var isSearchTerm = false;
-
-        var amazonSearchTerm = "";
-
-        var walmartSearchTem = "";
-        var targetSearchTerm = "";
-
-        var slashCount = 0;
-
-        for (var x = 0; x < url.length - 1; x++) {
-          console.log(url.charAt(x));
-          if (url.charAt(x) === "k" && url.charAt(x + 1) === "=") {
-            isSearchTerm = true;
-            x++;
-            x++;
-          } else if (url.charAt(x) === "q" && url.charAt(x + 1) === "=") {
-            isSearchTerm = true;
-            x++;
-            x++;
-          } else if (url.charAt(x) === "=" && baseURl.split(".")[1] === "target") {
-            isSearchTerm = true;
-            x++;
-          } else if (url.charAt(x) === "&") {
-            isSearchTerm = false;
-            break;
-          }
-          if (isSearchTerm) {
-            amazonSearchTerm = amazonSearchTerm + url.charAt(x).toString();
-            walmartSearchTem = walmartSearchTem + url.charAt(x).toString();
-            targetSearchTerm = targetSearchTerm + url.charAt(x).toString();
-          }
-          if (url.charAt(x) === "/") {
-            slashCount++;
-          } else if (slashCount === 2) {
-            baseURl = baseURl + url.charAt(x);
-          }
-        }
-
-        setItemName(amazonSearchTerm || walmartSearchTem || targetSearchTerm || "cant find results");
-
-        console.log("search term");
-        console.log(amazonSearchTerm);
-        console.log(baseURl);
-        console.log(urlSearchParams.get("search"));
-        setDisplayString(baseURl);
-
-        var baseUrlSplit = baseURl.split(".");
-        var companyName = "";
-
-        if (companyName === "starbucks") {
-          setItemName("coffee");
-        }
-
-        if (baseURl.length > 0) {
-          companyName = baseUrlSplit[1];
-          setDisplayString(companyName);
-        }
-        console.log("Company name " + companyName);
-
-        // if (navigator.geolocation) {
-        //   navigator.geolocation.getCurrentPosition((position) => {
-        //     const { latitude, longitude } = position.coords;
-        //     // Show a map centered at latitude / longitude.
-        //     console.log(latitude);
-        //     console.log(longitude);
-        //   });
-        // } else {
-        //   alert("cannot retreive location, allow location permission");
-        // }
-
-        console.log("item name " + amazonSearchTerm || walmartSearchTem);
-
-        productType = amazonSearchTerm || walmartSearchTem || targetSearchTerm || "cant find results";
-
-        if (companyName === "starbucks") {
-          productType = "coffee";
-        }
-
-        companyName = companyName.charAt(0).toUpperCase() + companyName.substring(1);
-
-        axios
-          .get("http://127.0.0.1:5000/stateController/get/" + companyName + "/50/-73", {})
-          .then(function (response) {
-            console.log(response);
-            //if (companyName == 'Starbucks') {
-            //   response.data.esgRating = 61
-            // }
-            setScore(response.data.esgRating * 2.1);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        axios
-          .get("http://127.0.0.1:5000/companyController/getlist/" + productType, {})
-          .then(function (response) {
-            console.log(response.data);
-
-            var storageList = [];
-
-            console.log("imported companies: ");
-            console.log(companies);
-
-            response.data.forEach((item) => {
-              const [id, category, companyName] = item;
-
-              var foundCompany = companies.find((company) => {
-                return company.key === id;
-              });
-
-              if (foundCompany) {
-                storageList.push(foundCompany);
-              }
-            });
-            console.log(storageList);
-            setSuggestions(storageList);
-          })
-
-          .catch(function (error) {
-            console.log(error);
-          });
-      });
-      console.log("Testing console");
-    } catch (e) {
-      console.log(e);
+  const GetScoreForCompanyFromTab = (url) => {
+    const result = companies.find((company) =>
+      company?.url == url ? url : null
+    );
+    if (result != undefined) {
+      setScore(result.score);
     }
-  };
 
+    console.log(result);
+  };
   useEffect(() => {
     try {
+      setScore(60);
+      //GetScoreForCompanyFromTab("https://5eadvancedmaterials.com/boron-101/");
       let queryOptions = { active: true, currentWindow: true };
+
       chrome.tabs.query(queryOptions, function (res) {
         console.log(res[0].url);
+        GetScoreForCompanyFromTab(res[0].url);
       });
+
       console.log("Testing console");
-      testFunction();
+
+      console.log(score);
+      // testFunction();
     } catch (e) {
       console.log(e);
     }
   }, []);
 
+  useEffect(() => {
+    setNumber(0);
+  }, [score]);
   // const fakePropsScore = 89;
 
   return (
     <div className="App">
-      <Card className="text-center" style={{ width: "18rem" }}>
-        <Card.Header as="h5">Consumer Score</Card.Header>
-        <Card.Body>
-          <CircleScore consumerScore={score || 0} />
-        </Card.Body>
-        <Comment score={score || 0} />
-        {score ? (
-          <div>
-            <Card.Header as="h5">Local Alternatives</Card.Header>
-            <Accordions suggestions={suggestions} />
-          </div>
-        ) : null}
-        {/* <Button variant="secondary" onClick={testFunction}>
+      <Container style={{ minwidth: "40vw" }}>
+        <Row className="justify-content-md-center">
+          <Col md="auto">
+            <Card
+              className="text-center"
+              style={{ width: "20rem", height: "100%" }}
+            >
+              <Card.Header as="h5">Consumer Detail</Card.Header>
+              <Card.Body>
+                5E Advanced Materials Inc is engaged boron specialty advanced
+                materials and lithium with a focus on enabling decarbonization,
+                including electric transportation, clean energy, and food
+                security.
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs>
+            <Card className="text-center" style={{ width: "20rem" }}>
+              <Card.Header as="h5">Consumer Score</Card.Header>
+              <Card.Body>
+                <CircleScore
+                  consumerScore={score || 0}
+                  number={number}
+                  setNumber={setNumber}
+                />
+              </Card.Body>
+              <Comment score={score || 0} />
+              {score ? (
+                <div>
+                  <Card.Header as="h5">Local Alternatives</Card.Header>
+                  <Accordions suggestions={suggestions} />
+                </div>
+              ) : null}
+              {/* <Button variant="secondary" onClick={testFunction}>
           TEST FUNCTION
         </Button>
         <div>{displayString}</div>
         <div>{itemName}</div> */}
-      </Card>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      <Container fluid="md">
+        <Row>
+          <Col md={12}>
+            <Card className="text-center full-width-card">
+              <Card.Header>Other Eco friendly Products</Card.Header>
+              <Card.Body></Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

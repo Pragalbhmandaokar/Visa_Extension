@@ -27,6 +27,9 @@ export default function App() {
     const result = companies.find((company) =>
       company?.url == url ? url : null
     );
+
+    //Filter from companies for abc (Keyword)
+
     if (result != undefined) {
       setScore(result.score);
     }
@@ -60,7 +63,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Container style={{ minwidth: "40vw" }}>
+      <Container style={{ minwidth: "60vw" }}>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Card

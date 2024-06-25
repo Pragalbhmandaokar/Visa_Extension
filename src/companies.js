@@ -1,11 +1,9 @@
 const companies = [
   {
     key: 1,
-    name: "Leaves",
-    score: 90,
-    img: "https://images.happycow.net/venues/1024/96/95/hcmp96956_307601.jpeg",
-    product: "Coffee Shop",
-    price: "",
+    name: "Retailing",
+    score: 40,
+    url: "https://www.abc-mart.net/shop/",
   },
   {
     key: 2,
@@ -29,7 +27,11 @@ const companies = [
     score: 42.0,
     url: "https://5eadvancedmaterials.com/boron-101/",
     img: "https://media.istockphoto.com/photos/mens-grey-blank-tshirt-templatefrom-two-sides-natural-shape-on-for-picture-id1134011734?k=20&m=1134011734&s=612x612&w=0&h=9kTFthlqNT6v0DIjIi-eJSwDZfSj65_qeFso7w2vFOA=",
-    product: "Ceramic Plate",
+    product: [
+      {
+        name: "",
+      },
+    ],
     price: "$14.99",
   },
   {

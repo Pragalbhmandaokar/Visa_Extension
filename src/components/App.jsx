@@ -30,6 +30,22 @@ export default function App() {
 
     //Filter from companies for abc (Keyword)
 
+    
+    //$("#inputId").val($.url.param("keyword"));
+    // function search(company){
+    //   return company.filter((company))=> {
+    //     if (company.url ==);
+    //   };
+
+    // }
+
+    const companyyname = 'abc';
+    for company.url in companies{
+      if (company.url includes(companyname))
+    }
+
+
+
     if (result != undefined) {
       setScore(result.score);
     }

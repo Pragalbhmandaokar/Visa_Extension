@@ -37,6 +37,14 @@ const companies = [
     information:
       "Coca-Cola HBC is the third-largest bottling partner in the Coca-Cola system by volume, behind Coca-Cola FEMSA and Coca-Cola Europacific Partners. In 2023, CCHBC sold 2.8 billion unit cases of beverages. For context, Coke’s largest bottler, Coke FEMSA, sold 4 billion unit cases in Latin America, and the second-largest—CCEP, serving Europe, Southeast Asia, and the South Pacific region—sold 3.3 billion unit cases. There is a long tail of Coke distributors, including brewers and independent operators with very small distribution territories.CCHBC is listed on the London Stock Exchange. Kar-Tess, a Luxembourg-based holding company, owns 23% of the equity of CCHBC, and Coca-Cola holds a further 21%. The remaining 56% is free float.",
   },
+  {
+    key: 206,
+    name: "Food Products",
+    score: 58,
+    url: "https://www.calmainefoods.com/",
+    information:
+      "Coca-Cola HBC is the third-largest bottling partner in the Coca-Cola system by volume, behind Coca-Cola FEMSA and Coca-Cola Europacific Partners. In 2023, CCHBC sold 2.8 billion unit cases of beverages. For context, Coke’s largest bottler, Coke FEMSA, sold 4 billion unit cases in Latin America, and the second-largest—CCEP, serving Europe, Southeast Asia, and the South Pacific region—sold 3.3 billion unit cases. There is a long tail of Coke distributors, including brewers and independent operators with very small distribution territories.CCHBC is listed on the London Stock Exchange. Kar-Tess, a Luxembourg-based holding company, owns 23% of the equity of CCHBC, and Coca-Cola holds a further 21%. The remaining 56% is free float.",
+  },
 ];
 
 export default companies;

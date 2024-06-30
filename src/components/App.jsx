@@ -31,9 +31,28 @@ export default function App() {
     }
   };
 
+  const takeCompanyNamefromUrl = (url) => {
+    try {
+      const { hostname } = new URL(url);
+      const parts = hostname.split(".").filter((part) => part !== "www");
+
+      if (parts.length >= 2) {
+        return parts[0];
+      } else {
+        return parts[0];
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  };
+
   const GetScoreForCompanyFromTab = async (url) => {
+    const companyName = takeCompanyNamefromUrl(url);
+
+    console.log(companyName);
     const result = companies.find((company) =>
-      company?.url == url ? url : null
+      takeCompanyNamefromUrl(company?.url) == companyName ? companyName : null
     );
 
     if (result != undefined) {
@@ -93,7 +112,7 @@ export default function App() {
                 />
               </Card.Body>
               <Comment score={(Product && Product.score) || 0} />
-              {Product && Product.score ? (
+              {Product && Product.score && productRecommendation.length > 0 ? (
                 <div>
                   <Card.Header as="h5">Local Alternatives</Card.Header>
                   <Accordions suggestions={productRecommendation} />

@@ -1,3 +1,7 @@
+html {
+  width: 800px; /* max: 1000px */
+  height: 550px; /* max: 750px */
+}
 body {
   background: #e3edf7;
 }
@@ -30,7 +34,8 @@ button h6 {
   width: 160;
   border-radius: 50%;
   padding: 20px;
-  box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15), -6px -6px 10px -1px rgb(255, 255, 255, 0.7);
+  box-shadow: 6px 6px 10px -1px rgb(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgb(255, 255, 255, 0.7);
 }
 
 .inner {
@@ -40,7 +45,10 @@ button h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 4px 4px 6px -1px rgb(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgb(255, 255, 255, 0.7), -0.5px -0.5px 0px rgb(255, 255, 255, 1), 0.5px 0.5px 0px rgb(0, 0, 0, 0.15), 0px 12px 10px -10px rgb(0, 0, 0, 0.05);
+  box-shadow: inset 4px 4px 6px -1px rgb(0, 0, 0, 0.2),
+    inset -4px -4px 6px -1px rgb(255, 255, 255, 0.7),
+    -0.5px -0.5px 0px rgb(255, 255, 255, 1), 0.5px 0.5px 0px rgb(0, 0, 0, 0.15),
+    0px 12px 10px -10px rgb(0, 0, 0, 0.05);
 }
 
 #number {

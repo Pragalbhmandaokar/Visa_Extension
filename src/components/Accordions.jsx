@@ -5,7 +5,7 @@ import { Accordion, Badge, Stack } from "react-bootstrap";
 
 export default function Accordions(props) {
   function getColor(score) {
-    if (score > 75) {
+    if (score > 65) {
       return "success";
     } else if (score > 55) {
       return "warning";
@@ -13,6 +13,22 @@ export default function Accordions(props) {
       return "danger";
     }
   }
+
+  const takeCompanyNamefromUrl = (url) => {
+    try {
+      const { hostname } = new URL(url);
+      const parts = hostname.split(".").filter((part) => part !== "www");
+
+      if (parts.length >= 2) {
+        return parts[parts.length - 2];
+      } else {
+        return parts[0];
+      }
+    } catch (error) {
+      console.error("Invalid URL:", error);
+      return null;
+    }
+  };
 
   return (
     <Accordion>
@@ -22,7 +38,8 @@ export default function Accordions(props) {
           <Accordion.Item key={company.key} eventKey={company.key}>
             <Accordion.Header>
               <h6>
-                <Badge bg={getColor(company.score)}>{company.score}</Badge> {company.name}
+                <Badge bg={getColor(company.score)}>{company.score}</Badge>{" "}
+                {takeCompanyNamefromUrl(company.url)}
               </h6>
             </Accordion.Header>
             <Accordion.Body>

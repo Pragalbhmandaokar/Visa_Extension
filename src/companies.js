@@ -19,15 +19,15 @@ const companies = [
     score: 69.1,
     url: "https://www.agthia.com/",
     information:
-      "Adani Wilmar Ltd is an FMCG food company offering most of the essential kitchen commodities for Indian consumers, including edible oil, wheat flour, rice, pulses, and sugar. The company also offers a diverse range of industry essentials, including oleochemicals, castor oil and its derivatives, and de-oiled cakes. The company's products are offered under a diverse range of brands across a broad price spectrum and cater to different customer groups. The company sells an entire range of packed products under the following brands: Fortune, King’s, Raag, Bullet, Fryola, Jubilee, Aadhaar, and VIVO.",
+      "agthia Ltd is an FMCG food company offering most of the essential kitchen commodities for Indian consumers, including edible oil, wheat flour, rice, pulses, and sugar. The company also offers a diverse range of industry essentials, including oleochemicals, castor oil and its derivatives, and de-oiled cakes. The company's products are offered under a diverse range of brands across a broad price spectrum and cater to different customer groups. The company sells an entire range of packed products under the following brands: Fortune, King’s, Raag, Bullet, Fryola, Jubilee, Aadhaar, and VIVO.",
   },
   {
     key: 204,
     name: "Food Products",
     score: 52.6,
-    url: "https://www.aljouf.com.sa/language/change/en",
+    url: "https://www.aljouf.com.sa/home",
     information:
-      "Adani Wilmar Ltd is an FMCG food company offering most of the essential kitchen commodities for Indian consumers, including edible oil, wheat flour, rice, pulses, and sugar. The company also offers a diverse range of industry essentials, including oleochemicals, castor oil and its derivatives, and de-oiled cakes. The company's products are offered under a diverse range of brands across a broad price spectrum and cater to different customer groups. The company sells an entire range of packed products under the following brands: Fortune, King’s, Raag, Bullet, Fryola, Jubilee, Aadhaar, and VIVO.",
+      "aljouf Ltd is an FMCG food company offering most of the essential kitchen commodities for Indian consumers, including edible oil, wheat flour, rice, pulses, and sugar. The company also offers a diverse range of industry essentials, including oleochemicals, castor oil and its derivatives, and de-oiled cakes. The company's products are offered under a diverse range of brands across a broad price spectrum and cater to different customer groups. The company sells an entire range of packed products under the following brands: Fortune, King’s, Raag, Bullet, Fryola, Jubilee, Aadhaar, and VIVO.",
   },
   {
     key: 205,

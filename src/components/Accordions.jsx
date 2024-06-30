@@ -39,17 +39,17 @@ export default function Accordions(props) {
             <Accordion.Header>
               <h6>
                 <Badge bg={getColor(company.score)}>{company.score}</Badge>{" "}
-                {takeCompanyNamefromUrl(company.url)}
+                <a href={company.url} target="_blank">
+                  {takeCompanyNamefromUrl(company.url)}
+                </a>
               </h6>
             </Accordion.Header>
             <Accordion.Body>
-              <Stack className="s-0" direction="horizontal" gap={3}>
-                <img src={company.img} alt="company-pic" />
+              <Stack className="s-0" direction="horizontal" gap={1}>
                 <figure className="text-end">
-                  <blockquote className="blockquote">
-                    <p>{company.product}</p>
-                  </blockquote>
-                  {company.price && <figcaption>{company.price}</figcaption>}
+                  <p>
+                    {company.information && company.information.slice(0, 50)}
+                  </p>
                 </figure>
               </Stack>
             </Accordion.Body>

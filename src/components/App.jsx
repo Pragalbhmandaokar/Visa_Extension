@@ -90,53 +90,36 @@ export default function App() {
 
   return (
     <div className="App">
-      <Container style={{ minwidth: "60vw" }}>
-        <Row className="justify-content-md-center">
-          <Col md="auto">
-            <Card
-              className="text-start"
-              style={{ width: "20rem", height: "55vh", overflowY: "scroll" }}
-            >
-              <Card.Header as="h5">Consumer Detail</Card.Header>
-              <Card.Body>{Product && Product.information}</Card.Body>
-            </Card>
-          </Col>
-          <Col xs>
-            <Card className="text-center" style={{ width: "20rem" }}>
-              <Card.Header as="h5">Consumer Score</Card.Header>
-              <Card.Body>
-                <CircleScore
-                  consumerScore={(Product && Product.score) || 0}
-                  number={number}
-                  setNumber={setNumber}
-                />
-              </Card.Body>
-              <Comment score={(Product && Product.score) || 0} />
-              {Product && Product.score && productRecommendation.length > 0 ? (
-                <div>
-                  <Card.Header as="h5">Local Alternatives</Card.Header>
-                  <Accordions suggestions={productRecommendation} />
-                </div>
-              ) : null}
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-      {/* <Container fluid="md">
-        <Row>
-          <Col md={12}>
-            <Card className="text-center full-width-card">
-              <Card.Header>Other Eco friendly Products</Card.Header>
-              <Card.Body>
-                {productRecommendation.length > 0 &&
-                  productRecommendation.map((product) => (
-                    <div>{product.url}</div>
-                  ))}
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container> */}
+      <Card
+        className="text-start"
+        style={{
+          width: "18rem",
+          height: "25vh",
+        }}
+      >
+        <Card.Header as="h5">Company Detail</Card.Header>
+        <Card.Body style={{ overflowY: "scroll" }}>
+          {(Product && Product.information) || "Company information"}
+        </Card.Body>
+      </Card>
+
+      <Card className="text-center" style={{ width: "18rem" }}>
+        <Card.Header as="h5">EcoScore</Card.Header>
+        <Card.Body>
+          <CircleScore
+            consumerScore={(Product && Product.score) || 0}
+            number={number}
+            setNumber={setNumber}
+          />
+        </Card.Body>
+        <Comment score={Product && Product.score ? Product.score : 0} />
+        {Product && Product.score && productRecommendation.length > 0 ? (
+          <div>
+            <Card.Header as="h5">Other Eco friendly Products</Card.Header>
+            <Accordions suggestions={productRecommendation} />
+          </div>
+        ) : null}
+      </Card>
     </div>
   );
 }

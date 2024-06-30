@@ -13,33 +13,41 @@ import companies from "../companies";
 // Boostrap imports
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
-import Spinner from "react-bootstrap/Spinner";
 import { Container, Row, Col } from "react-bootstrap";
 
 export default function App() {
-  const [displayString, setDisplayString] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [score, setScore] = useState(0);
-  const [suggestions, setSuggestions] = useState([]);
+  const [Product, setProduct] = useState(null);
+  const [productRecommendation, SetProductRecommendation] = useState([]);
   const [number, setNumber] = useState(0);
 
-  const GetScoreForCompanyFromTab = (url) => {
+  const getProductRecommendation = async () => {
+    if (Product) {
+      const recommendation = companies.filter(
+        (company) =>
+          company.score > Product.score && company.name == Product.name
+      );
+
+      SetProductRecommendation(recommendation);
+    }
+  };
+
+  const GetScoreForCompanyFromTab = async (url) => {
     const result = companies.find((company) =>
       company?.url == url ? url : null
     );
 
-    //Filter from companies for abc (Keyword)
-
     if (result != undefined) {
-      setScore(result.score);
+      setProduct(result);
     }
-
-    console.log(result);
+    await getProductRecommendation();
   };
-  useEffect(() => {
+
+  useEffect(async () => {
     try {
-      setScore(60);
-      //GetScoreForCompanyFromTab("https://5eadvancedmaterials.com/boron-101/");
+      // await GetScoreForCompanyFromTab(
+      //   "https://www.aljouf.com.sa/language/change/en"
+      // );
+
       let queryOptions = { active: true, currentWindow: true };
 
       chrome.tabs.query(queryOptions, function (res) {
@@ -49,7 +57,6 @@ export default function App() {
 
       console.log("Testing console");
 
-      console.log(score);
       // testFunction();
     } catch (e) {
       console.log(e);
@@ -57,9 +64,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    setNumber(0);
-  }, [score]);
-  // const fakePropsScore = 89;
+    if (Product) {
+      getProductRecommendation();
+    }
+  }, [Product]);
 
   return (
     <div className="App">
@@ -67,16 +75,11 @@ export default function App() {
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Card
-              className="text-center"
-              style={{ width: "20rem", height: "100%" }}
+              className="text-start"
+              style={{ width: "20rem", height: "55vh", overflowY: "scroll" }}
             >
               <Card.Header as="h5">Consumer Detail</Card.Header>
-              <Card.Body>
-                5E Advanced Materials Inc is engaged boron specialty advanced
-                materials and lithium with a focus on enabling decarbonization,
-                including electric transportation, clean energy, and food
-                security.
-              </Card.Body>
+              <Card.Body>{Product && Product.information}</Card.Body>
             </Card>
           </Col>
           <Col xs>
@@ -84,37 +87,37 @@ export default function App() {
               <Card.Header as="h5">Consumer Score</Card.Header>
               <Card.Body>
                 <CircleScore
-                  consumerScore={score || 0}
+                  consumerScore={(Product && Product.score) || 0}
                   number={number}
                   setNumber={setNumber}
                 />
               </Card.Body>
-              <Comment score={score || 0} />
-              {score ? (
+              <Comment score={(Product && Product.score) || 0} />
+              {Product && Product.score ? (
                 <div>
                   <Card.Header as="h5">Local Alternatives</Card.Header>
-                  <Accordions suggestions={suggestions} />
+                  <Accordions suggestions={productRecommendation} />
                 </div>
               ) : null}
-              {/* <Button variant="secondary" onClick={testFunction}>
-          TEST FUNCTION
-        </Button>
-        <div>{displayString}</div>
-        <div>{itemName}</div> */}
             </Card>
           </Col>
         </Row>
       </Container>
-      <Container fluid="md">
+      {/* <Container fluid="md">
         <Row>
           <Col md={12}>
             <Card className="text-center full-width-card">
               <Card.Header>Other Eco friendly Products</Card.Header>
-              <Card.Body></Card.Body>
+              <Card.Body>
+                {productRecommendation.length > 0 &&
+                  productRecommendation.map((product) => (
+                    <div>{product.url}</div>
+                  ))}
+              </Card.Body>
             </Card>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 }
@@ -122,22 +125,22 @@ export default function App() {
 // /* global chrome */
 // async function getCurrentTab() {
 //   let queryOptions = { active: true, currentWindow: true };
-//   chrome.tabs.getCurrent(tab => {
-//     console.log(tab)
-//   })
+//   chrome.tabs.getCurrent((tab) => {
+//     console.log(tab);
+//   });
 //   return "hi";
 // }
 
 // chrome.runtime.onInstalled.addListener(async () => {
-//   console.log("testing2")
+//   console.log("testing2");
 //   console.log(await getCurrentTab());
 // });
 
 // chrome.runtime.onInstalled.addListener((reason) => {
-//   console.log("testing1")
+//   console.log("testing1");
 //   if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
 //     chrome.tabs.create({
-//       url: 'onboarding.html'
+//       url: "onboarding.html",
 //     });
 //   }
 // });

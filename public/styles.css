@@ -1,11 +1,3 @@
-html {
-  width: 800px; /* max: 1000px */
-  height: 550px; /* max: 750px */
-}
-body {
-  background: #e3edf7;
-}
-
 img {
   width: 72px !important;
   height: auto !important;

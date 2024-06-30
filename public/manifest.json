@@ -1,5 +1,5 @@
 {
-  "name": "McHacks9 Extension",
+  "name": "EcoScore Extension",
   "description": "Base Level Extension",
   "version": "1.0",
   "manifest_version": 2,
@@ -8,18 +8,13 @@
     "default_title": "Open the popup"
   },
   "icons": {
-    "16": "logo192.png",
-    "48": "logo192.png",
-    "128": "logo192.png"
+    "16": "Logo.png",
+    "48": "Logo.png",
+    "128": "Logo.png"
   },
-  "permissions": [
-    "tabs",
-    "geolocation"
-  ],
+  "permissions": ["tabs", "geolocation"],
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": ["background.js"],
     "persistent": false
   }
 }

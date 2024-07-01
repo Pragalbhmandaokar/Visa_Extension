@@ -1,4 +1,4 @@
-# ECO-SCORE Dashboard
+# ECO-SCORE EXTENSION
 
 ## Overview
 
